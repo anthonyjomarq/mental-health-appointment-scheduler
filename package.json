@@ -1,0 +1,9 @@
+{
+  "name": "appointment-scheduler",
+  "version": "1.0.0",
+  "scripts": {
+    "install-deps": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build && cd ../backend && npm run build",
+    "start": "cd backend && npm start"
+  }
+}

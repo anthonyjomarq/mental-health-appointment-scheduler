@@ -1,18 +1,17 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 import { Appointment, CreateAppointmentRequest, TimeSlot } from './types';
 import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({
-  origin: [
-    'http://localhost:5173', 
-    'https://mental-health-appointment-scheduler.onrender.com'
-  ]
-}));
+app.use(cors());
 app.use(express.json());
+
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 let appointments: Appointment[] = [];
 
@@ -123,6 +122,11 @@ app.post('/appointments', (req, res) => {
       time: newAppointment.time
     }
   });
+});
+
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 app.listen(PORT, () => {
