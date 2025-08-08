@@ -124,10 +124,12 @@ app.post('/api/appointments', (req, res) => {
   });
 });
 
-// Handle React routing - serve index.html for all non-API routes
-app.get('*', (req, res) => {
-  if (!req.path.startsWith('/api')) {
+// Handle React routing - serve index.html for non-API routes
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.startsWith('/api')) {
     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+  } else {
+    next();
   }
 });
 
