@@ -6,7 +6,12 @@ import { v4 as uuidv4 } from 'uuid';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', 
+    'https://mental-health-appointment-scheduler.onrender.com'
+  ]
+}));
 app.use(express.json());
 
 let appointments: Appointment[] = [];
