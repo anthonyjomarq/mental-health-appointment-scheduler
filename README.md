@@ -1,6 +1,6 @@
 # Appointment Scheduler
 
-A simple web app for booking mental health appointments. Built with React + TypeScript frontend and Node.js + Express backend.
+A simple web app for booking mental health appointments. Built with React + TypeScript frontend and Node.js + Express backend. You can access it live at https://mental-health-appointment-scheduler.onrender.com/
 
 ## How to run it
 
