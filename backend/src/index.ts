@@ -47,7 +47,7 @@ const validateTime = (time: string): boolean => {
   return timeRegex.test(time);
 };
 
-app.get('/appointments', (req, res) => {
+app.get('/api/appointments', (req, res) => {
   const { date } = req.query;
   
   if (!date || typeof date !== 'string') {
@@ -71,7 +71,7 @@ app.get('/appointments', (req, res) => {
   res.json(availableSlots);
 });
 
-app.post('/appointments', (req, res) => {
+app.post('/api/appointments', (req, res) => {
   const { name, email, date, time }: CreateAppointmentRequest = req.body;
   
   if (!name || !email || !date || !time) {
@@ -124,9 +124,11 @@ app.post('/appointments', (req, res) => {
   });
 });
 
-// Handle React routing, return all requests to React app
+// Handle React routing - serve index.html for all non-API routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+  }
 });
 
 app.listen(PORT, () => {

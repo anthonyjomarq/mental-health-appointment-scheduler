@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { TimeSlot, CreateAppointmentRequest, AppointmentResponse } from './types';
 import './App.css';
 
-const API_URL = '';
+const API_URL = '/api';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState('');
